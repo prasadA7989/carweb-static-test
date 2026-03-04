@@ -22,10 +22,6 @@ pipeline {
         
         
 
-        stage('Restart Apache') {
-            steps {
-                sh 'sudo systemctl restart apache2'
-            }
-        }
+        
     }
 }
