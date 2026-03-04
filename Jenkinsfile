@@ -11,13 +11,14 @@ pipeline {
    
         }
 
-        stage('Deploy to Apache') {
-            steps {
-                sh '''
-                sudo rm -rf /var/www/html/*
-                sudo cp -r * /var/www/html/
-                sudo chown -R www-data:www-data /var/www/html
-                '''
+       stage('Deploy to Apache') {
+    steps {
+        sh '''
+        sudo rm -rf /var/www/html/*
+        sudo cp -r * /var/www/html/
+        '''
+    }
+}
             }
         }
 
