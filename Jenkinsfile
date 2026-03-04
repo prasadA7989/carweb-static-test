@@ -14,8 +14,8 @@ pipeline {
        stage('Deploy to Apache') {
     steps {
         sh '''
-        sudo rm -rf /var/www/html/*
-        sudo cp -r * /var/www/html/
+         rm -rf /var/www/html/*
+         cp -r * /var/www/html/
         '''
     }
 }
