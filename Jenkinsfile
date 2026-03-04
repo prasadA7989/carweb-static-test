@@ -1,26 +1,37 @@
 pipeline {
     agent any
 
-    environment {
-        APACHE_PATH = '/var/www/html'
-    }
-
     stages {
 
         stage('Checkout') {
             steps {
-                git branch: 'main',
+                git branch: 'main', 
                     url: 'https://github.com/prasadA7989/carweb-static-test.git'
+            }
+        }
+
+        stage('Install Apache') {
+            steps {
+                sh '''
+                sudo apt update
+                sudo apt install apache2 -y
+                '''
             }
         }
 
         stage('Deploy to Apache') {
             steps {
                 sh '''
-                    echo "Deploying to Apache..."
-                    sudo rm -rf /var/www/html/index.html
-                    sudo cp -r * /var/www/html/
+                sudo rm -rf /var/www/html/*
+                sudo cp -r * /var/www/html/
+                sudo chown -R www-data:www-data /var/www/html
                 '''
+            }
+        }
+
+        stage('Restart Apache') {
+            steps {
+                sh 'sudo systemctl restart apache2'
             }
         }
     }
