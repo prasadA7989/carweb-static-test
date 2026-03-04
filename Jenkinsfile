@@ -18,7 +18,7 @@ pipeline {
             steps {
                 sh '''
                     echo "Deploying to Apache..."
-                    sudo rm -rf /var/www/html/*
+                    sudo rm -rf /var/www/html/index.html
                     sudo cp -r * /var/www/html/
                 '''
             }
