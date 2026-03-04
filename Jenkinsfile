@@ -19,8 +19,8 @@ pipeline {
         '''
     }
 }
-            }
-        }
+        
+        
 
         stage('Restart Apache') {
             steps {
