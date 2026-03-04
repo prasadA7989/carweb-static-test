@@ -8,15 +8,7 @@ pipeline {
                 git branch: 'main', 
                     url: 'https://github.com/prasadA7989/carweb-static-test.git'
             }
-        }
-
-        stage('Install Apache') {
-            steps {
-                sh '''
-                sudo apt update
-                sudo apt install apache2 -y
-                '''
-            }
+   
         }
 
         stage('Deploy to Apache') {
