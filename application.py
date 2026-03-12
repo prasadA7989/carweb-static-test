@@ -1,8 +1,14 @@
-from flask import Flask
-app = Flask(__name__)
+from flask import Flask, send_from_directory
 
-@app.route("/")
+application = Flask(__name__, static_folder='.')
+
+@application.route('/')
 def home():
-    return open("index.html").read()
+    return send_from_directory('.', 'index.html')
 
-application = app
+@application.route('/<path:path>')
+def static_files(path):
+    return send_from_directory('.', path)
+
+if __name__ == "__main__":
+    application.run()
