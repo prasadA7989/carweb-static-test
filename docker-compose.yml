@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: carweb-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: carweb-backend
+    ports:
+      - "5000:5000"
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: carwebdb
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8
+    container_name: carweb-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: carwebdb
+    ports:
+      - "3306:3306"
+    volumes:
+      - carweb-db-data:/var/lib/mysql
+
+volumes:
+  carweb-db-data:
